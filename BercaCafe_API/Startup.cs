@@ -1,4 +1,6 @@
 using BercaCafe_API.Context;
+using BercaCafe_API.Repositories.Data;
+using BercaCafe_API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,7 @@ namespace BercaCafe_API
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddScoped<IReportCupRepository, ReportCupRepository>();
             services.AddDbContext<BercaCafeContext>(options =>
             options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("BercaCafe")));
             services.AddCors(e =>
